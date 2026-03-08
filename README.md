@@ -26,6 +26,10 @@ Users can describe the type of website they want, and the system instantly gener
 
 ---
 
+#### 🌐 Live Demo
+[smartcode-ai-generator](https://smartcode-ai-generator.vercel.app/)
+
+---
 #### 👩‍💻 Author
 **Muzna Amir** – Frontend Developer | AI Enthusiast
 
