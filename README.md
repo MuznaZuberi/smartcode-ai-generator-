@@ -24,10 +24,6 @@ Users can describe the type of website they want, and the system instantly gener
 - Vanilla JavaScript  
 - LocalStorage API
 
----
-
-#### 🌐 Live Demo
-[smartcode-ai-generator](https://smartcode-ai-generator.vercel.app/)
 
 ---
 #### 👩‍💻 Author
