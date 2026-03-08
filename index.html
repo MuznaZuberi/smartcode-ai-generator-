@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCode AI Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-gradient"></div>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">⚡</div>
+                <span class="logo-text">SmartCode AI</span>
+            </div>
+            <p class="tagline">AI-Powered Website Generator</p>
+            <p class="header-credit">Created with ❤️ by <a href="https://www.linkedin.com/in/muzna-amir-280135264/" target="_blank" class="developer-link"><span>Muzna Amir</span> 💼</a></p>
+        </header>
+
+        <main class="main-content">
+            <section class="input-section glass-card">
+                <div class="card-header">
+                    <span class="card-title">Create Your Website</span>
+                </div>
+
+                <input type="text" class="prompt-input" id="websiteName" placeholder="Website Name (e.g., My Portfolio, Tech Corp)" style="min-height: 50px; margin-bottom: 10px;">
+
+                <textarea 
+                    class="prompt-input" 
+                    id="promptInput"
+                    placeholder="Describe the website you want to create...
+
+Example: Create a modern portfolio website for a software developer with a dark theme, featuring a hero section, about me, projects showcase, skills section, and contact form."
+                ></textarea>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="generateBtn" onclick="generateCode()">
+                        <span>🚀</span>
+                        <span>Generate Code</span>
+                    </button>
+                </div>
+
+                <div class="history-section">
+                    <div class="history-title">
+                        <span>📜 Recent Prompts</span>
+                        <button class="history-clear" onclick="clearHistory()">Clear All</button>
+                    </div>
+                    <div class="history-list" id="historyList"></div>
+                </div>
+            </section>
+
+            <section class="output-section glass-card">
+                <div class="card-header">
+                    <span class="card-title">Output Preview</span>
+                    <div class="btn-group">
+                        <button class="btn btn-secondary btn-sm" onclick="copyCode()">📋 Copy</button>
+                        <button class="btn btn-secondary btn-sm" onclick="downloadCode()">💾 Download</button>
+                    </div>
+                </div>
+
+                <div class="output-tabs">
+                    <button class="tab-btn active" onclick="switchTab('preview', this)">👁️ Preview</button>
+                    <button class="tab-btn" onclick="switchTab('html', this)">📄 HTML</button>
+                    <button class="tab-btn" onclick="switchTab('css', this)">🎨 CSS</button>
+                    <button class="tab-btn" onclick="switchTab('js', this)">⚡ JavaScript</button>
+                </div>
+
+                <div class="output-container">
+                    <div class="loading-overlay" id="loadingOverlay">
+                        <div class="loader"></div>
+                        <div class="loading-text">GENERATING CODE</div>
+                        <div class="loading-steps">
+                            <div class="loading-step"></div>
+                            <div class="loading-step"></div>
+                            <div class="loading-step"></div>
+                        </div>
+                    </div>
+
+                    <div class="output-content active" id="previewContent">
+                        <iframe class="preview-frame" id="previewFrame"></iframe>
+                    </div>
+
+                    <div class="output-content" id="htmlContent">
+                        <textarea class="code-viewer" id="htmlViewer" spellcheck="false" placeholder="Edit HTML here..."></textarea>
+                    </div>
+
+                    <div class="output-content" id="cssContent">
+                        <textarea class="code-viewer" id="cssViewer" spellcheck="false" placeholder="Edit CSS here..."></textarea>
+                    </div>
+
+                    <div class="output-content" id="jsContent">
+                        <textarea class="code-viewer" id="jsViewer" spellcheck="false" placeholder="Edit JavaScript here..."></textarea>
+                    </div>
+
+                    <div class="empty-state" id="emptyState">
+                        <div class="empty-icon">💻</div>
+                        <div class="empty-text">Enter a prompt and click Generate to create your website code</div>
+                    </div>
+
+                    <div class="error-state" id="errorState">
+                        <div class="error-icon">⚠️</div>
+                        <div class="error-message" id="errorMessage">Something went wrong. Please try again.</div>
+                        <button class="btn btn-primary btn-sm" onclick="retryGenerate()">🔄 Retry</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="toast" id="toast">
+        <span class="toast-icon" id="toastIcon">✓</span>
+        <span id="toastMessage">Success!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
