@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCode AI Generator</title>
+    <title>SmartCode AI - Professional Website Generator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,30 +15,46 @@
                 <div class="logo-icon">⚡</div>
                 <span class="logo-text">SmartCode AI</span>
             </div>
-            <p class="tagline">AI-Powered Website Generator</p>
+            <p class="tagline">Professional AI-Powered Website Generator</p>
             <p class="header-credit">Created with ❤️ by <a href="https://www.linkedin.com/in/muzna-amir-280135264/" target="_blank" class="developer-link"><span>Muzna Amir</span> 💼</a></p>
         </header>
 
         <main class="main-content">
             <section class="input-section glass-card">
                 <div class="card-header">
-                    <span class="card-title">Create Your Website</span>
+                    <span class="card-title">🎯 Describe Your Website</span>
                 </div>
 
-                <input type="text" class="prompt-input" id="websiteName" placeholder="Website Name (e.g., My Portfolio, Tech Corp)" style="min-height: 50px; margin-bottom: 10px;">
+                <input type="text" class="prompt-input website-name-input" id="websiteName" placeholder="📝 Website Name (e.g., My Portfolio, TechCorp, ShopHub)" style="min-height: 50px; margin-bottom: 10px;">
 
                 <textarea 
                     class="prompt-input" 
                     id="promptInput"
-                    placeholder="Describe the website you want to create...
+                    placeholder="💡 Describe your dream website in detail...
 
-Example: Create a modern portfolio website for a software developer with a dark theme, featuring a hero section, about me, projects showcase, skills section, and contact form."
+Examples:
+• Create a portfolio website with purple+black theme, 8 services, 6 projects, home about services projects and contact pages
+• Build an ecommerce store with cart, product listings, checkout page, dark theme
+• Create a SaaS landing page with pricing tables, features, testimonials, animated hero section
+• Build a blog website with article listings, categories, search functionality, light theme
+• Create a business dashboard with analytics charts, user management, sidebar navigation"
                 ></textarea>
+
+                <div class="tech-stack-selector">
+                    <label>🛠️ Technology Stack:</label>
+                    <div class="tech-options">
+                        <label class="tech-option">
+                            <input type="radio" name="techStack" value="html" checked>
+                            <span>HTML/CSS/JavaScript</span>
+                        </label>
+                    </div>
+                    <p class="tech-note" style="font-size: 11px; color: var(--text-secondary); margin-top: 10px;">✅ Pure HTML/CSS/JS - No build tools required. Works instantly in any browser!</p>
+                </div>
 
                 <div class="btn-group">
                     <button class="btn btn-primary" id="generateBtn" onclick="generateCode()">
                         <span>🚀</span>
-                        <span>Generate Code</span>
+                        <span>Generate Complete Website</span>
                     </button>
                 </div>
 
@@ -53,7 +69,7 @@ Example: Create a modern portfolio website for a software developer with a dark 
 
             <section class="output-section glass-card">
                 <div class="card-header">
-                    <span class="card-title">Output Preview</span>
+                    <span class="card-title">📋 Output Preview</span>
                     <div class="btn-group">
                         <button class="btn btn-secondary btn-sm" onclick="copyCode()">📋 Copy</button>
                         <button class="btn btn-secondary btn-sm" onclick="downloadCode()">💾 Download</button>
@@ -61,21 +77,23 @@ Example: Create a modern portfolio website for a software developer with a dark 
                 </div>
 
                 <div class="output-tabs">
-                    <button class="tab-btn active" onclick="switchTab('preview', this)">👁️ Preview</button>
+                    <button class="tab-btn active" onclick="switchTab('preview', this)">👁️ Live Preview</button>
                     <button class="tab-btn" onclick="switchTab('html', this)">📄 HTML</button>
                     <button class="tab-btn" onclick="switchTab('css', this)">🎨 CSS</button>
                     <button class="tab-btn" onclick="switchTab('js', this)">⚡ JavaScript</button>
+                    <button class="tab-btn" onclick="switchTab('structure', this)">📁 Structure</button>
                 </div>
 
                 <div class="output-container">
                     <div class="loading-overlay" id="loadingOverlay">
                         <div class="loader"></div>
-                        <div class="loading-text">GENERATING CODE</div>
+                        <div class="loading-text">GENERATING COMPLETE WEBSITE</div>
                         <div class="loading-steps">
                             <div class="loading-step"></div>
                             <div class="loading-step"></div>
                             <div class="loading-step"></div>
                         </div>
+                        <div class="loading-status" id="loadingStatus">Analyzing requirements...</div>
                     </div>
 
                     <div class="output-content active" id="previewContent">
@@ -94,9 +112,13 @@ Example: Create a modern portfolio website for a software developer with a dark 
                         <textarea class="code-viewer" id="jsViewer" spellcheck="false" placeholder="Edit JavaScript here..."></textarea>
                     </div>
 
+                    <div class="output-content" id="structureContent">
+                        <div class="file-structure" id="fileStructure"></div>
+                    </div>
+
                     <div class="empty-state" id="emptyState">
                         <div class="empty-icon">💻</div>
-                        <div class="empty-text">Enter a prompt and click Generate to create your website code</div>
+                        <div class="empty-text">Enter a detailed prompt and click Generate to create your complete website</div>
                     </div>
 
                     <div class="error-state" id="errorState">
@@ -112,6 +134,21 @@ Example: Create a modern portfolio website for a software developer with a dark 
     <div class="toast" id="toast">
         <span class="toast-icon" id="toastIcon">✓</span>
         <span id="toastMessage">Success!</span>
+    </div>
+
+    <!-- Restriction Popup Modal -->
+    <div class="restriction-overlay" id="restrictionOverlay">
+        <div class="restriction-modal">
+            <div class="restriction-icon">⚠️</div>
+            <h2 class="restriction-title">Website Prompts Only!</h2>
+            <p class="restriction-message">Please enter prompts related to <strong>website creation</strong> only.</p>
+            <div class="restriction-examples">
+                <span>✅ "Create portfolio website"</span>
+                <span>✅ "Build ecommerce store"</span>
+                <span>✅ "Design landing page"</span>
+            </div>
+            <button class="btn btn-primary" onclick="closeRestrictionModal()">Got It!</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
